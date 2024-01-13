@@ -1,10 +1,4 @@
-import logo from './logo.svg';
-import './App.css';
-import Editor from './Editor';
-import Form from './Form';
-import { useState, useCallback } from 'react';
-function App() {
-  const [schema, setSchema] = useState(JSON.stringify([
+[
     {
       "sort": 1,
       "label": "Pizza Name",
@@ -375,43 +369,4 @@ function App() {
       "level": 0,
       "placeholder": ""
     }
-], null, 2));
-  const [valid, setValid] = useState(true);
-  const [formSchema, setFormSchema] = useState([]);
-  const onSchemaEdited = useCallback(
-    (newSchema) => {
-      setSchema(newSchema);
-      try {
-        const parsedCode = JSON.parse(newSchema);
-        setValid(true);
-      } catch (err) {
-        setValid(false);
-      }
-    },
-    [setSchema]
-  );
-  const handleGenerate = () => {
-    console.log('generate');
-    setFormSchema(JSON.parse(schema));
-  }
-  return (
-    <div className='container' style={{ minHeight: '100vh', paddingTop: '20px'}}>
-      <div className="row">
-        <div className='col-sm-5'>
-          <Editor 
-            schema={schema} 
-            onSchemaEdited={onSchemaEdited} 
-            valid={valid}
-            setValid={setValid}
-          />
-          <button type="button" className="btn btn-primary" onClick={ handleGenerate } disabled={ !valid } >Generate</button>
-        </div>
-        <div className="col-sm-7">
-          <Form schema={formSchema} />
-        </div>
-      </div>
-    </div>
-  );
-}
-
-export default App;
+]
