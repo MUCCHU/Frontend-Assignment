@@ -2,7 +2,10 @@ import React from 'react'
 import TextInput from './TextInput';
 import NumInput from './NumInput';
 import Required from './Required';
-import info from './info_icon.svg'
+import info from './info_icon.svg';
+import Select from './Select';
+import Radio from './Radio';
+import Switch from './Switch';
 
 function RenderItem(props) {
     // Check the ui type of item and render appropriate input fields
@@ -20,6 +23,11 @@ function RenderItem(props) {
                         </span>}  
                     </label>
                     <hr />
+                    {item['subParameters'].map((subItem, index) => {
+                        return (
+                            <RenderItem item={subItem} key={index} />
+                        )
+                    })}
             </div>
         )
     }else if(item.uiType==='Input'){
@@ -29,10 +37,15 @@ function RenderItem(props) {
         return <NumInput item={item} />
     }
     else if(item.uiType==='Select'){
+        return <Select item={item} />
     }
     else if(item.uiType==='Radio'){
-
+        return <Radio item={item} />
     }else if(item.uiType==='Switch'){
+        return <Switch item={item} />
+    }
+    else if(item.uiType==='Ignore'){
+
     }
   return (
     <div>Item Not Defined</div>

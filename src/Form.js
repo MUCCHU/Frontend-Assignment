@@ -17,7 +17,10 @@ function Form(props) {
     let schema = Array.from((props.schema ? props.schema : []))
     let sorted_schema = sortSchemas(schema)
     console.log("sorted arr ",sorted_schema)
-
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        alert('Form submitted');
+    }
 
     // iterate over items of array:
     // Check if the item is a group or a ui item, if ui item render it, and check for subitem
@@ -32,6 +35,7 @@ function Form(props) {
                 <RenderItem item={item} key={index} />
             )
         })}
+            <input type="submit" className="btn btn-primary" value="Submit" />
         </form>
     </div>
   )
