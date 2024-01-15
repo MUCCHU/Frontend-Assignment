@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Editor from './Editor';
 import Form from './Form';
@@ -382,6 +381,7 @@ function App() {
     (newSchema) => {
       setSchema(newSchema);
       try {
+        // eslint-disable-next-line no-unused-vars
         const parsedCode = JSON.parse(newSchema);
         setValid(true);
       } catch (err) {
