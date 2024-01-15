@@ -10,7 +10,7 @@ function Select(props) {
             <div className="col-sm-7">
             <select className="form-select" required={item['validate']['required']} disabled ={item['validate']['immutable']} name={item['jsonKey']} aria-label="Default select example">
                 {item['validate']['options'].map((option) => (
-                    <option value={option['value']} selected={option['value'] == item['defaultValue']}>{option['label']}</option>
+                    <option value={option['value']} selected={option['value'] === item['defaultValue']}>{option['label']}</option>
                 ))}
             </select>
             </div>

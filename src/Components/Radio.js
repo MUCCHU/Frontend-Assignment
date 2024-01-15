@@ -7,7 +7,7 @@ function Radio(props) {
         <div className="col-sm-12">
         {item['validate']['options'].map((option) => (
             <>
-                <input type="radio" class="btn-check" name={item['jsonKey']} id={option['value']} autocomplete="off" value={option['value']} defaultChecked={option['value']==item['validate']['defaultValue']}  />
+                <input type="radio" class="btn-check" name={item['jsonKey']} id={option['value']} autocomplete="off" value={option['value']} defaultChecked={option['value']===item['validate']['defaultValue']}  />
                 <label class="btn btn-secondary" for={option['value']}>{option['label']}</label>
             </>
         ))}

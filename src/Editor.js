@@ -1,5 +1,4 @@
 import MonacoEditor from '@monaco-editor/react';
-import { useState, useCallback} from 'react';
 
 
 const monacoEditorOptions = {

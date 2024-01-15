@@ -11,7 +11,7 @@ function Switch(props) {
     <>
         <div class="form-check form-switch">
         <label class="form-check-label" for="flexSwitchCheckDefault">{item['label']}</label>
-        <input class="form-check-input" type="checkbox" role="switch" onChange={handleChange} id="flexSwitchCheckDefault"/>
+        <input class="form-check-input" type="checkbox" role="switch" onChange={handleChange} id="flexSwitchCheckDefault" checked={checked} />
         </div>
     </>
   )

@@ -19,7 +19,7 @@ function RenderItem(props) {
                         {item['label']}
                         {item['validate']['required'] && <Required />}
                         {item['description'] && <span className="d-inline-block ps-2" tabindex="0" data-bs-toggle="tooltip" data-bs-placement="left" title={item['description']}>
-                            <img src={info} />
+                            <img alt='info icon' src={info} />
                         </span>}  
                     </label>
                     <hr />

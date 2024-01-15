@@ -29,7 +29,7 @@ function Form(props) {
     return (
     <div>
         <h2>Form</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
         {sorted_schema.map((item, index) => {
             return (
                 <RenderItem item={item} key={index} />
