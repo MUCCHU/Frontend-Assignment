@@ -28,8 +28,8 @@ function Form(props) {
     // uiType: Input, Number, Group, Select, Switch etc
     return (
     <div>
+        <form className='my_form' style={{padding: '20px', border: '2px solid black', borderRadius: '12px'}} onSubmit={handleSubmit}>
         <h2>Form</h2>
-        <form onSubmit={handleSubmit}>
         {sorted_schema.map((item, index) => {
             return (
                 <RenderItem item={item} key={index} />

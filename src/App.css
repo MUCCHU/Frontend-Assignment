@@ -11,7 +11,56 @@ body{
 } */
 
 .input_wrapper{
-  background-color: #f8f8f8;
+  background-color: #fbfdff;
   padding: 10px;
   border-radius: 5px;
+  /* border: 2px solid #f2f8fd; */
+}
+
+.my_form > .row{
+  border: 2px solid #f2f8fd;
+}
+
+#staticEmail{
+  background-color: #eff6fe;
+  border: 1px solid #e5effa;
+}
+
+.radio_wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 20px;
+}
+
+.radio_button{
+  flex: 1;
+}
+
+label.btn.btn-secondary{
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #e5effa;
+  background-color: #eff6fe;
+  color: #000;
+}
+
+label.btn.btn-secondary {
+  background-color: #e5effa;
+  color: #000;
+}
+
+.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+  background-color: #deebfc;
+  border: 2px solid #b9bbee;
+  color: black;
+}
+
+.btn-check+.btn:hover {
+  background-color: #deebfc;
+  border: 2px solid #b9bbee;
+  color: black;
 }

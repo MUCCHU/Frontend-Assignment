@@ -2,6 +2,8 @@ import './App.css';
 import Editor from './Editor';
 import Form from './Form';
 import { useState, useCallback } from 'react';
+
+
 function App() {
   const [schema, setSchema] = useState(JSON.stringify([
     {
@@ -391,9 +393,10 @@ function App() {
     [setSchema]
   );
   const handleGenerate = () => {
-    console.log('generate');
     setFormSchema(JSON.parse(schema));
   }
+
+
   return (
     <div className='container' style={{ minHeight: '100vh', paddingTop: '20px'}}>
       <div className="row">

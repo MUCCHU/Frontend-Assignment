@@ -1,12 +1,21 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux'
+import { updateState } from '../Redux/slicer';
+import genUniqueKey from './genUniqueKey';
 
 function Switch(props) {
     const item = props.item;
-    const [checked, setChecked] = useState(false);
+    const [checked, setChecked] = useState(item['validate']['defaultValue']);
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
+    const dispatch = useDispatch();
+    const ukey = genUniqueKey(item);
+
+    useEffect(() => {
+        dispatch(updateState({key:ukey, value:checked}))
+    }, [checked])
   return (
     <>
         <div class="form-check form-switch">
