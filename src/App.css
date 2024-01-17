@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
 }
-body{
+body {
   font-family: 'Montserrat', sans-serif;
 }
 /* .row{
@@ -10,23 +10,23 @@ body{
   grid-template-columns: 50% 50%;
 } */
 
-.input_wrapper{
+.input_wrapper {
   background-color: #fbfdff;
   padding: 10px;
   border-radius: 5px;
   /* border: 2px solid #f2f8fd; */
 }
 
-.my_form > .row{
+.my_form > .row {
   border: 2px solid #f2f8fd;
 }
 
-#staticEmail{
+#staticEmail {
   background-color: #eff6fe;
   border: 1px solid #e5effa;
 }
 
-.radio_wrapper{
+.radio_wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,11 +34,11 @@ body{
   gap: 20px;
 }
 
-.radio_button{
+.radio_button {
   flex: 1;
 }
 
-label.btn.btn-secondary{
+label.btn.btn-secondary {
   width: 100%;
   text-align: center;
   padding: 10px;
@@ -53,13 +53,17 @@ label.btn.btn-secondary {
   color: #000;
 }
 
-.btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active{
+.btn-check:checked + .btn,
+.btn.active,
+.btn.show,
+.btn:first-child:active,
+:not(.btn-check) + .btn:active {
   background-color: #deebfc;
   border: 2px solid #b9bbee;
   color: black;
 }
 
-.btn-check+.btn:hover {
+.btn-check + .btn:hover {
   background-color: #deebfc;
   border: 2px solid #b9bbee;
   color: black;
