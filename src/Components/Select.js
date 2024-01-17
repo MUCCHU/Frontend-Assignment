@@ -11,7 +11,7 @@ function Select(props) {
     const ukey = genUniqueKey(item);
     useEffect(() => {
         dispatch(updateState({key:ukey, value:item['validate']['defaultValue']}))
-    }, [item['validate']['defaultValue']])
+    }, [item, dispatch, ukey])
     const onChange = (e) => {
         setValue(e.target.value)
         dispatch(updateState({key:ukey, value:e.target.value}))

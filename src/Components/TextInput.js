@@ -13,7 +13,7 @@ function TextInput(props) {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(updateState({key:ukey, value:item['validate']['defaultValue']}))
-    }, [item['validate']['defaultValue']])
+    }, [item, dispatch, ukey])
     const onChange = (e) => {
         setValue(e.target.value)
         dispatch(updateState({key:ukey, value:e.target.value}))

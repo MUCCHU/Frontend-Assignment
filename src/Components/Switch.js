@@ -15,7 +15,7 @@ function Switch(props) {
 
     useEffect(() => {
         dispatch(updateState({key:ukey, value:checked}))
-    }, [checked])
+    }, [checked, ukey, dispatch])
   return (
     <>
         <div class="form-check form-switch">
