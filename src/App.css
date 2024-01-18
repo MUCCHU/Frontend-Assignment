@@ -21,7 +21,7 @@ body {
   border: 2px solid #f2f8fd;
 }
 
-#staticEmail {
+#staticEmail, .form-select {
   background-color: #eff6fe;
   border: 1px solid #e5effa;
 }

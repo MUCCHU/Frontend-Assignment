@@ -19,8 +19,8 @@ function Radio(props) {
   return (
     <>
       <div className='col-sm-12 radio_wrapper'>
-        {item['validate']['options'].map((option) => (
-          <div className='radio_button'>
+        {item['validate']['options'].map((option, index) => (
+          <div key={index} className='radio_button'>
             <input
               type='radio'
               className='btn-check'

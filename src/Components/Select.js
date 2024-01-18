@@ -28,10 +28,11 @@ function Select(props) {
             required={item['validate']['required']}
             disabled={item['validate']['immutable']}
             name={item['jsonKey']}
+            value={value}
             aria-label='Default select example'
           >
-            {item['validate']['options'].map((option) => (
-              <option value={option['value']} selected={option['value'] === value}>
+            {item['validate']['options'].map((option, index) => (
+              <option key={index} value={option['value']}>
                 {option['label']}
               </option>
             ))}

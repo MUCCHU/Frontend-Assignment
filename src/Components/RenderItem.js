@@ -16,8 +16,6 @@ function RenderItem(props) {
 
   const state = useSelector((state) => state.data)
   const shouldRender = (item) => {
-    console.log('Check if should render', item)
-
     if (item['uiType'] !== 'Ignore') {
       return true
     }
@@ -27,7 +25,6 @@ function RenderItem(props) {
     for (let i = 0; i < conditions.length; i++) {
       let condition = conditions[i]
       if (condition['op'] === '==') {
-        console.log('Operator ==')
         let level = (conditions[i]['jsonKey'].match(/\./g) || []).length
         if (conditions[i]['value'] !== state[conditions[i].jsonKey.split('.').slice(-1)[0] + '_' + level]) {
           should_render = false
@@ -76,7 +73,7 @@ function RenderItem(props) {
   } else if (item.uiType === 'Switch') {
     return <Switch item={item} />
   } else if (item.uiType === 'Ignore') {
-    if (!shouldRender(item)) {
+    if (shouldRender(item)) {
       return null
     }
     // shouldRender(item)
