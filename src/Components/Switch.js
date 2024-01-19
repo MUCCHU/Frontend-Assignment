@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateState } from '../Redux/slicer'
 import genUniqueKey from './genUniqueKey'
+import Required from './Required'
 
 function Switch(props) {
   const item = props.item
@@ -20,7 +21,7 @@ function Switch(props) {
     <>
       <div className='form-check form-switch'>
         <label className='form-check-label' htmlFor='flexSwitchCheckDefault'>
-          {item['label']}
+          {item['label']} {item['validate']['required'] && <Required />}
         </label>
         <input
           className='form-check-input'

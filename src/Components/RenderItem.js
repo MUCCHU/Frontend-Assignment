@@ -9,9 +9,6 @@ import Switch from './Switch'
 import { useSelector } from 'react-redux'
 
 function RenderItem(props) {
-  // Check the ui type of item and render appropriate input fields
-  // If its group call recursively to render subcomponents
-
   const { item } = props
 
   const state = useSelector((state) => state.data)
@@ -19,24 +16,26 @@ function RenderItem(props) {
     if (item['uiType'] !== 'Ignore') {
       return true
     }
-    // check all conditions in item.conditions and return only if all conditions are true
     let conditions = item['conditions']
     let should_render = true
     for (let i = 0; i < conditions.length; i++) {
       let condition = conditions[i]
       if (condition['op'] === '==') {
         let level = (conditions[i]['jsonKey'].match(/\./g) || []).length
-        if (conditions[i]['value'] !== state[conditions[i].jsonKey.split('.').slice(-1)[0] + '_' + level]) {
-          should_render = false
-          break
-        }
+        let temp = (conditions[i]['value'] === state[conditions[i].jsonKey.split('.').slice(-1)[0] + '_' + level])
+        if(condition['action']!=='enable') temp = !temp
+        should_render = (should_render && temp)
       }
-    }
-    if (conditions['action'] !== 'enable') {
-      should_render = !should_render
     }
     return should_render
   }
+
+  // const handleOptional = (item) => {
+  //   if (item['validate']['required']) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   if (item.uiType === 'Group') {
     return (
@@ -73,7 +72,7 @@ function RenderItem(props) {
   } else if (item.uiType === 'Switch') {
     return <Switch item={item} />
   } else if (item.uiType === 'Ignore') {
-    if (shouldRender(item)) {
+    if (!shouldRender(item)) {
       return null
     }
     // shouldRender(item)

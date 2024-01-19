@@ -4,21 +4,50 @@ import Modal from './Components/Modal'
 import { useSelector } from 'react-redux'
 import genUniqueKey from './Components/genUniqueKey'
 
+
+let advField = {
+    "sort": 10000,
+    "label": "Show advanced fields",
+    "description": "",
+    "validate": {
+      "required": true,
+      "defaultValue": false,
+      "immutable": false
+    },
+    "jsonKey": "adv_fields",
+    "uiType": "AdvSwitch",
+    "icon": "",
+    "level": 2,
+    "placeholder": ""
+  }
+
 function sortSchemas(schema){
   
     schema.sort(function(a, b){return a['sort'] - b['sort']})
+    let contains_optional = false
+    let contains_adv = false
+    let level = 0
+
     for (let i = 0; i < schema.length; i++) {
-        if (schema[i].uiType === 'Group') {
+        if (schema[i].uiType === 'Group' || schema[i].uiType === 'Ignore') {
             schema[i].subParameters = sortSchemas(schema[i].subParameters)
         }
+
+        if(!schema[i]['validate']['required']){
+            contains_optional = true
+            level = schema[i]['level']
+        }
+        if(schema[i]['jsonKey']==='adv_fields'){
+            contains_adv = true
+        }
+    }
+    if(contains_optional && !contains_adv){
+        console.log("Addiing adv switch to level ", level)
+        advField['level'] = level
+        // schema.push(advField)
     }
     return schema;
 }
-
-// function getKey(str) {
-//     return str.replace(/_(\d+)$/, '');
-//    }
-
 
 function Form(props) {
     let schema = Array.from((props.schema ? props.schema : []))
@@ -42,14 +71,10 @@ function Form(props) {
           let condition = conditions[i]
           if (condition['op'] === '==') {
             let level = (conditions[i]['jsonKey'].match(/\./g) || []).length
-            if (conditions[i]['value'] !== state[conditions[i].jsonKey.split('.').slice(-1)[0] + '_' + level]) {
-              should_render = false
-              break
-            }
+            let temp = (conditions[i]['value'] !== state[conditions[i].jsonKey.split('.').slice(-1)[0] + '_' + level])
+            if(condition['action']==='enable') temp = !temp
+            should_render = (should_render && temp)
           }
-        }
-        if (conditions['action'] !== 'enable') {
-          should_render = !should_render
         }
         return should_render
       }
@@ -57,8 +82,7 @@ function Form(props) {
 
     const makeObj = (item) =>{
         let obj = {}
-        console.log("In makeobj item = ", item)
-        if(item.uiType === 'Group'){
+        if((item.uiType === 'Group' ||  item.uiType === 'Ignore') && shouldRender(item)){
             let grp = {}
                 for(let i=0;i<item.subParameters.length;i++){
                     let temp = makeObj(item.subParameters[i])
@@ -66,22 +90,10 @@ function Form(props) {
                 }
                 obj[item.jsonKey] = grp
             
-        }else if( item.uiType === 'Ignore' && !shouldRender(item)){
-            let grp = {}
-            for(let i=0;i<item.subParameters.length;i++){
-                let temp = makeObj(item.subParameters[i])
-                grp = {...grp, ...temp}
-            }
-            obj[item.jsonKey] = grp
         }
         else{
-            console.log("item.jsonKey = ", item.jsonKey)
             obj[item.jsonKey] = state[genUniqueKey(item)]
-            console.log("obj = ", obj)
-            console.log("state = ", state)
-            console.log("genUniqueKey(item.jsonKey) = ", genUniqueKey(item))
         }
-        console.log("Outside else obj = ", obj)
         return obj;
     }
     let final_obj = {}
