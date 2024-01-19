@@ -31,17 +31,50 @@ function Form(props) {
     console.log("sorted arr ",sorted_schema)
 
 
+    const shouldRender = (item) => {
+        if (item['uiType'] !== 'Ignore') {
+          return true
+        }
+        // check all conditions in item.conditions and return only if all conditions are true
+        let conditions = item['conditions']
+        let should_render = true
+        for (let i = 0; i < conditions.length; i++) {
+          let condition = conditions[i]
+          if (condition['op'] === '==') {
+            let level = (conditions[i]['jsonKey'].match(/\./g) || []).length
+            if (conditions[i]['value'] !== state[conditions[i].jsonKey.split('.').slice(-1)[0] + '_' + level]) {
+              should_render = false
+              break
+            }
+          }
+        }
+        if (conditions['action'] !== 'enable') {
+          should_render = !should_render
+        }
+        return should_render
+      }
+
+
     const makeObj = (item) =>{
         let obj = {}
         console.log("In makeobj item = ", item)
-        if(item.uiType === 'Group' || item.uiType === 'Ignore'){
+        if(item.uiType === 'Group'){
+            let grp = {}
+                for(let i=0;i<item.subParameters.length;i++){
+                    let temp = makeObj(item.subParameters[i])
+                    grp = {...grp, ...temp}
+                }
+                obj[item.jsonKey] = grp
+            
+        }else if( item.uiType === 'Ignore' && !shouldRender(item)){
             let grp = {}
             for(let i=0;i<item.subParameters.length;i++){
                 let temp = makeObj(item.subParameters[i])
                 grp = {...grp, ...temp}
             }
             obj[item.jsonKey] = grp
-        }else{
+        }
+        else{
             console.log("item.jsonKey = ", item.jsonKey)
             obj[item.jsonKey] = state[genUniqueKey(item)]
             console.log("obj = ", obj)

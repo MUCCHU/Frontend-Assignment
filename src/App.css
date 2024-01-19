@@ -4,6 +4,9 @@
 body {
   font-family: 'Montserrat', sans-serif;
 }
+.mycontainer{
+  margin: 20px;
+}
 /* .row{
   display: grid;
   gap: 20px;
@@ -67,4 +70,8 @@ label.btn.btn-secondary {
   background-color: #deebfc;
   border: 2px solid #b9bbee;
   color: black;
+}
+
+.card > section{
+  height: 80vh !important;
 }

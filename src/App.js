@@ -402,11 +402,11 @@ function App() {
   }
 
   return (
-    <div className='container' style={{ minHeight: '100vh', paddingTop: '20px' }}>
+    <div className='mycontainer' style={{ minHeight: '100vh', paddingTop: '20px' }}>
       <div className='row'>
         <div className='col-sm-5'>
           <Editor schema={schema} onSchemaEdited={onSchemaEdited} valid={valid} setValid={setValid} />
-          <button type='button' className='btn btn-primary' onClick={handleGenerate} disabled={!valid}>
+          <button type='button' className='btn btn-primary' style={{marginTop: '20px'}} onClick={handleGenerate} disabled={!valid}>
             Generate
           </button>
         </div>
