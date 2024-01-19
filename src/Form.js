@@ -44,7 +44,7 @@ function sortSchemas(schema){
     if(contains_optional && !contains_adv){
         console.log("Addiing adv switch to level ", level)
         advField['level'] = level
-        // schema.push(advField)
+        schema.push(advField)
     }
     return schema;
 }
@@ -55,6 +55,7 @@ function Form(props) {
     const [data, setData] = useState({
         "goo": "bar"
     })
+    const [showOpt, setShowOpt] = useState(false)
     const state = useSelector(state => state.data)
     let sorted_schema = sortSchemas(schema)
     console.log("sorted arr ",sorted_schema)
@@ -120,7 +121,7 @@ function Form(props) {
         <h2>Form</h2>
         {sorted_schema.map((item, index) => {
             return (
-                <RenderItem item={item} key={index} />
+                <RenderItem visible={true} showOpt={showOpt} setShowOpt={setShowOpt} item={item} key={index} />
             )
         })}
             <input type="submit" className="btn btn-primary" value="Submit" />

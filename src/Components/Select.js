@@ -16,6 +16,7 @@ function Select(props) {
     setValue(e.target.value)
     dispatch(updateState({ key: ukey, value: e.target.value }))
   }
+  if(!props.visible) return null
 
   return (
     <>

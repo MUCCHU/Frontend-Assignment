@@ -15,7 +15,7 @@ function Radio(props) {
     setValue(e.target.value)
     dispatch(updateState({ key: ukey, value: e.target.value }))
   }
-
+  if(!props.visible) return null
   return (
     <>
       <div className='col-sm-12 radio_wrapper'>

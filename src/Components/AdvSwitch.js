@@ -6,9 +6,9 @@ function AdvSwitch(props) {
     }
   return (
     <>
-    <div className='form-check form-switch'>
+    <div className='form-check form-switch mb-3'>
       <label className='form-check-label' htmlFor='flexSwitchCheckDefault'>
-        {props.showOptional ? "Show Advanced fields" : "Hide Advanced fields"}
+        {"Show Advanced fields"}
       </label>
       <input
         className='form-check-input'

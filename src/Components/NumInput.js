@@ -16,7 +16,7 @@ function NumInput(props) {
     setValue(e.target.value)
     dispatch(updateState({ key: ukey, value: e.target.value }))
   }
-
+  if(!props.visible) return null
   return (
     <div className='row mb-3 input_wrapper'>
       <Label item={item} />

@@ -17,9 +17,12 @@ function Switch(props) {
   useEffect(() => {
     dispatch(updateState({ key: ukey, value: checked }))
   }, [checked, ukey, dispatch])
+
+  if(!props.visible) return null
+
   return (
     <>
-      <div className='form-check form-switch'>
+      <div className='form-check form-switch mb-3'>
         <label className='form-check-label' htmlFor='flexSwitchCheckDefault'>
           {item['label']} {item['validate']['required'] && <Required />}
         </label>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import TextInput from './TextInput'
 import NumInput from './NumInput'
 import Required from './Required'
@@ -6,11 +6,13 @@ import info from './info_icon.svg'
 import Select from './Select'
 import Radio from './Radio'
 import Switch from './Switch'
+import AdvSwitch from './AdvSwitch'
 import { useSelector } from 'react-redux'
 
 function RenderItem(props) {
   const { item } = props
 
+  const [showOpt, setShowOpt] = useState(false)
   const state = useSelector((state) => state.data)
   const shouldRender = (item) => {
     if (item['uiType'] !== 'Ignore') {
@@ -30,14 +32,9 @@ function RenderItem(props) {
     return should_render
   }
 
-  // const handleOptional = (item) => {
-  //   if (item['validate']['required']) {
-  //     return true;
-  //   }
-  //   return false;
-  // }
 
   if (item.uiType === 'Group') {
+    if(!(item['validate']['required'] || props.showOpt)) return null
     return (
       <div className='row mb-3 input_wrapper'>
         <label htmlFor='staticEmail' className='col-sm-12 col-form-label'>
@@ -57,20 +54,20 @@ function RenderItem(props) {
         </label>
         <hr />
         {item['subParameters'].map((subItem, index) => {
-          return <RenderItem item={subItem} key={index} />
+          return <RenderItem showOpt={showOpt} setShowOpt={setShowOpt} item={subItem} key={index} />
         })}
       </div>
     )
   } else if (item.uiType === 'Input') {
-    return <TextInput item={item} />
+    return ((<TextInput visible={(item['validate']['required'] || props.showOpt)} item={item} />))
   } else if (item.uiType === 'Number') {
-    return <NumInput item={item} />
+    return (<NumInput visible={(item['validate']['required'] || props.showOpt)} item={item} />)
   } else if (item.uiType === 'Select') {
-    return <Select item={item} />
+    return (<Select visible={(item['validate']['required'] || props.showOpt)} item={item} />)
   } else if (item.uiType === 'Radio') {
-    return <Radio item={item} />
+    return (<Radio visible={(item['validate']['required'] || props.showOpt)} item={item} />)
   } else if (item.uiType === 'Switch') {
-    return <Switch item={item} />
+    return (<Switch visible={(item['validate']['required'] || props.showOpt)} item={item} />)
   } else if (item.uiType === 'Ignore') {
     if (!shouldRender(item)) {
       return null
@@ -79,6 +76,8 @@ function RenderItem(props) {
     return item['subParameters'].map((subItem, index) => {
       return <RenderItem item={subItem} key={index} />
     })
+  }else if(item.uiType === 'AdvSwitch'){
+    return <AdvSwitch showOptional={props.showOpt} setShowOptional={props.setShowOpt}/>
   }
   return <div>Item Not Defined</div>
 }
