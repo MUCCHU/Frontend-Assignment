@@ -4,6 +4,8 @@ function AdvSwitch(props) {
     const handleChange = (event) => {
       props.setShowOptional(event.target.checked)
     }
+
+    // if(!props.visible) return null
   return (
     <>
     <div className='form-check form-switch mb-3'>
